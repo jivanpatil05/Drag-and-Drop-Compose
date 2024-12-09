@@ -87,18 +87,18 @@ fun DragandDrop() {
                 )
             )
         }
-        val dragItems by remember {
+        /*val dragItems by remember {
             derivedStateOf {
                 ShopItems.size
             }
-        }
+        }*/
 
         var draggedItemIndex by remember { mutableStateOf<Int?>(null) }
 
         val dragDropState =
-            rememberDragDropState(lazyListState = stateList, draggableItemsNum = dragItems,
+            rememberDragDropState(lazyListState = stateList, draggableItemsNum = ShopItems.size,
                 onMove = { fromIndex, toIndex ->
-                    draggedItemIndex = toIndex
+                    ShopItems.add(toIndex, ShopItems.removeAt(fromIndex))
                 },
                 onDragStart = { index ->
                     draggedItemIndex = index
@@ -238,7 +238,7 @@ fun RowItem(
 ) {
     Column {
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = Days, color = Color.White)
+        Text(text = Days, color = Color.Black)
         Spacer(modifier = Modifier.height(8.dp))
         Card(
             modifier = modifier
